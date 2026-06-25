@@ -20,17 +20,17 @@
 
 ## Introduction
 
-This module has been created to streamline and automate the grenade throwing in the FVTT Cyberpunk RED system.
+This module has been created to streamline and automate grenade throwing in the FVTT Cyberpunk RED system.
 
 ## Features
 
-* A **throw button** appears directly on each grenade in the Gear tab, where how Split and Delete Buttons are. Clicking it automatically decrements quantity and optionally removes the item when the last one is used.
+* A **throw button** appears directly on each grenade in the Gear tab, where the Split and Delete Buttons are. Clicking it automatically decrements the quantity and optionally removes the item when the last one is used.
 * Throwing a grenade posts a **chat card** with buttons to place the blast template, roll damage, and apply effects.
 * A **5x5 blast template** is placed centered on the thrower's token with a single click. Template color is fully configurable per grenade type in the settings.
 * **Damage is rolled and applied automatically** to all tokens inside the blast template. Armor SP is soaked and ablation is applied per the rules. The template is deleted after damage is applied.
 * All current grenade types are handled with rules-accurate behavior.
 * **Resistance check dialogs** prompt the GM per-target for Resist Torture/Drugs and Cybertech checks.
-* **Sequencer integration** plays explosion, EMP, and flashbang animations and sounds on detonation. Automatically detects what JB2A version is installed for the animations.
+* **Sequencer integration** plays explosion, EMP, and flashbang animations and sounds on detonation. Automatically detects which JB2A version is installed for the animations.
 * **Bundled sound effects** for explosion, EMP, and flashbang are included and set as defaults.
 * **Custom grenade code editor** allows GMs to write JavaScript for special grenade types, with access to targets, templates, actor, and the full GrenadeSystem API. Includes the Rave Grenade from "The 12 Days of Cutiemas" DLC as a built-in example.
 
