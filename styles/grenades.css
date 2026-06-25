@@ -1,0 +1,404 @@
+.grenade-throw-button {
+  color: #c62828;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 2px 5px;
+  transition: all 0.2s ease;
+}
+
+.grenade-throw-button:hover {
+  color: #e53535;
+  text-shadow: 0 0 5px rgba(198, 40, 40, 0.8);
+  transform: scale(1.1);
+}
+
+.grenade-card-body {
+  gap: 5px;
+}
+
+.grenade-card-header-row {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0 4px;
+}
+
+.grenade-card-img {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--cpr-background-chat-border);
+  object-fit: contain;
+}
+
+.grenade-actions {
+  display: flex;
+  gap: 5px;
+  margin: 2px 0;
+}
+
+.grenade-action-button {
+  flex: 1;
+  padding: 6px 4px;
+  background-color: var(--cpr-background-chat-card-block-before);
+  color: var(--cpr-text-chat-normal);
+  border: 1px solid var(--cpr-background-chat-border);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: filter 0.15s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.grenade-action-button:hover:not(.disabled) {
+  filter: brightness(1.3);
+}
+
+.grenade-action-button:active:not(.disabled) {
+  filter: brightness(0.85);
+}
+
+.grenade-action-button.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.grenade-action-button i {
+  font-size: 17px;
+}
+
+.template-button {
+  background-color: var(--cpr-background-chat-card-block);
+}
+
+.damage-button,
+.macro-button,
+.smoke-button {
+  background-color: var(--cpr-color-red);
+}
+
+.grenade-dv-toggle {
+  background: none;
+  border: 1px solid var(--cpr-background-chat-border);
+  color: var(--cpr-text-chat-normal);
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 10px;
+  width: 100%;
+  margin: 3px 0;
+  opacity: 0.6;
+}
+
+.grenade-dv-toggle:hover {
+  opacity: 1;
+}
+
+.grenade-dv-inner-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.grenade-dv-inner-table th,
+.grenade-dv-inner-table td {
+  border: 1px solid var(--cpr-background-chat-border);
+  padding: 2px 3px;
+  text-align: center;
+  color: var(--cpr-text-chat-normal);
+}
+
+.grenade-dv-inner-table th {
+  background-color: var(--cpr-background-chat-card-block);
+}
+
+.grenade-dv-inner-table td {
+  background-color: var(--cpr-background-chat-card-block-before);
+}
+
+.grenade-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 2px;
+  padding-top: 5px;
+  border-top: 1px solid var(--cpr-background-chat-border);
+  color: var(--cpr-text-chat-normal);
+  opacity: 0.7;
+}
+
+.grenade-stats span {
+  flex: 1;
+  text-align: center;
+}
+
+.grenade-stats strong {
+  color: var(--cpr-text-chat-normal);
+}
+
+.hide {
+  display: none;
+}
+
+.grenade-gm-card-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding: 4px 6px;
+  background-color: var(--cpr-background-chat-card-block-before);
+  color: var(--cpr-text-chat-normal);
+}
+
+.grenade-gm-card-stats strong {
+  color: var(--cpr-text-chat-normal);
+}
+
+.grenade-result-text {
+  padding: 0.5rem 0.25rem 0.25rem 0.5rem;
+  line-height: 1.5;
+  color: var(--cpr-text-chat-normal);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.grenade-gm-card-block {
+  clip-path: none;
+}
+
+.grenade-gm-card-block::before {
+  clip-path: none;
+}
+
+.grenade-apply-damage-btn,
+.grenade-apply-resistance-btn {
+  flex: none;
+  flex-direction: row;
+  align-self: center;
+  width: auto;
+  padding: 5px 14px;
+  font-size: 11px;
+  gap: 6px;
+}
+
+.critical {
+  color: #ff0000;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+  animation: pulse 1s infinite;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.grenade-template-label {
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+}
+
+.dice-roll .dice-result .dice-formula .critical,
+.dice-formula .critical,
+.dice-result .critical {
+  color: #ff0000 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  font-weight: bold !important;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.8) !important;
+  animation: pulse 1s infinite !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.default-grenade-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.default-grenade-config-form nav.tabs {
+  border-bottom: 1px solid var(--cpr-background-chat-border, #666);
+  margin-bottom: 0;
+  padding: 0 4px;
+  display: flex;
+  gap: 2px;
+}
+
+.default-grenade-config-form nav.tabs .item {
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: #999;
+}
+
+.default-grenade-config-form nav.tabs .item.active {
+  color: #eaeaea;
+  border-bottom-color: #c62828;
+}
+
+.default-grenade-config-form section.tab-content {
+  min-height: 260px;
+}
+
+.grenade-color-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 12px;
+}
+
+.grenade-color-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.grenade-color-row label {
+  font-size: 11px;
+  color: #ccc;
+  flex: 1;
+}
+
+.grenade-color-row input[type="color"] {
+  width: 36px;
+  height: 22px;
+  border: 1px solid #555;
+  padding: 1px;
+  cursor: pointer;
+  background: none;
+  border-radius: 2px;
+}
+
+.effect-section {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.effect-hint {
+  font-size: 11px;
+  color: #888;
+  font-style: italic;
+  margin: 0 0 4px;
+}
+
+.effect-subsection-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: #c62828;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(198, 40, 40, 0.3);
+}
+
+.default-grenade-config-form .form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.default-grenade-config-form .form-group label {
+  flex: 0 0 140px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.default-grenade-config-form .form-group input[type="text"] {
+  flex: 1;
+  font-size: 11px;
+  color: #eaeaea;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #555;
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
+.default-grenade-config-form .form-group input[type="number"] {
+  width: 70px;
+  font-size: 11px;
+  color: #eaeaea;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #555;
+  padding: 3px 6px;
+  border-radius: 2px;
+}
+
+.default-grenade-config-form .sheet-footer {
+  padding: 10px 14px;
+  border-top: 1px solid #555;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.default-grenade-config-form .sheet-footer button {
+  padding: 6px 18px;
+  font-size: 12px;
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.default-grenade-config-form .sheet-footer button:hover {
+  filter: brightness(1.2);
+}
+
+.default-grenade-config-form .form-fields {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.default-grenade-config-form .form-fields input[type="text"] {
+  flex: 1;
+}
+
+.default-grenade-config-form .form-fields .file-picker {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #555;
+  border-radius: 2px;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+.default-grenade-config-form .form-fields .file-picker:hover {
+  background: rgba(198, 40, 40, 0.3);
+  border-color: #c62828;
+  color: #fff;
+}

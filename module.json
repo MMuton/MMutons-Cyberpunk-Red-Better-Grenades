@@ -1,0 +1,56 @@
+{
+  "id": "mmutons-cyberpunk-red-upgraded-grenades",
+  "title": "MMuton's Cyberpunk RED Better Grenades",
+  "description": "Enhanced grenade system for Cyberpunk RED",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12",
+    "maximum": "12"
+  },
+  "authors": [
+    {
+      "name": "MMuton",
+      "email": "[email protected]"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "cyberpunk-red-core",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.80.0"
+        }
+      }
+    ],
+    "recommends": [
+      {
+        "id": "sequencer",
+        "type": "module",
+        "reason": "Required for explosion, EMP, flashbang, and smoke animations."
+      },
+      {
+        "id": "jb2a_patreon",
+        "type": "module",
+        "reason": "Provides animation files for grenade visual effects (Patreon version also works!)"
+      },
+      {
+        "id": "JB2A_DnD5e",
+        "type": "module",
+        "reason": "Provides animation files for grenade visual effects (Free version also works!)"
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/grenade-handler.js"
+  ],
+  "styles": [
+    "styles/grenades.css"
+  ],
+  "url": "https://github.com/mmuton/mmuton-cyberpunk-red-tweaks",
+  "manifest": "https://github.com/mmuton/mmuton-cyberpunk-red-tweaks/releases/latest/download/module.json",
+  "download": "https://github.com/mmuton/mmuton-cyberpunk-red-tweaks/releases/latest/download/module.zip",
+  "license": "LICENSE",
+  "readme": "README.md"
+}

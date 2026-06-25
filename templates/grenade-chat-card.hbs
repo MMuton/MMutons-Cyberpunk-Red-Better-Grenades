@@ -1,0 +1,37 @@
+{{!-- Alternative Handlebars template if you prefer external templating --}}
+<div class="cpr-grenade-card">
+  <div class="grenade-header">
+    <img src="{{item.img}}" alt="{{item.name}}" />
+    <div class="grenade-title">
+      <h3>{{actor.name}} throws a {{item.name}}!</h3>
+      <span class="grenade-variety">{{variety}}</span>
+    </div>
+  </div>
+  
+  {{#if item.system.description}}
+  <div class="grenade-description">
+    {{{item.system.description}}}
+  </div>
+  {{/if}}
+  
+  <div class="grenade-actions">
+    <button class="grenade-action-button template-button" 
+            data-action="place-template"
+            data-color="{{color}}">
+      <i class="fas fa-draw-square"></i>
+      Place Blast Template (5×5)
+    </button>
+    
+    <button class="grenade-action-button damage-button" 
+            data-action="roll-damage">
+      <i class="fas fa-dice-d6"></i>
+      Roll Damage (6d6)
+    </button>
+  </div>
+  
+  <div class="grenade-stats">
+    <span><strong>Range:</strong> 25m</span>
+    <span><strong>DV:</strong> Athletics + DEX + 1d10</span>
+    <span><strong>Effect:</strong> {{variety}}</span>
+  </div>
+</div>
