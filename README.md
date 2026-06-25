@@ -36,17 +36,17 @@ This module has been created to streamline and automate the grenade throwing in 
 
 <h1 align="center"> Easy & Automated Grenade Throwing With 5x5 Template Creation  </h1>
 <p align="center">
-  <img src = "https://i.imgur.com/m3WUKhV.gif" width=700>
+  <img src = "https://i.imgur.com/ngGlbl6.gif" width=700>
 </p>
 
 <h1 align="center"> Automated Damage & Effect Application To Tokens In The Template (With Resistance Checks Where Needed) </h1>
 <p align="center">
-  <img src = "https://i.imgur.com/ngGlbl6.gif" width=700>
+  <img src = "https://i.imgur.com/SWP9HFU.gif" width=700>
 </p>
 
 <h1 align="center"> Extensive Settings & Customization </h1>
 <p align="center">
-  <img src="https://i.imgur.com/SWP9HFU.gif" width=700>
+  <img src="https://i.imgur.com/hC0X7oH.png" width=700>
 </p>
 
 ## Known Issues
