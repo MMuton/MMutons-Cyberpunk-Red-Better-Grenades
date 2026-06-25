@@ -36,17 +36,17 @@ This module has been created to streamline and automate the grenade throwing in 
 
 <h1 align="center"> Easy & Automated Grenade Throwing With 5x5 Template Creation  </h1>
 <p align="center">
-  <img src = "https://i.imgur.com/ngGlbl6.gif" width=700>
+  <img src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExenIwbzVvN2p6MXk0Ym8zM20zeGxpbXFxbThydjcwamhodGMybm12MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Php8prfD0vvtrPJLBP/giphy.gif" width=700>
 </p>
 
 <h1 align="center"> Automated Damage & Effect Application To Tokens In The Template (With Resistance Checks Where Needed) </h1>
 <p align="center">
-  <img src = "https://i.imgur.com/SWP9HFU.gif" width=700>
+  <img src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTRjdzRobGZzc3BkMXo0YjV6ZzZhZ3JmaTJodWhrcW5pODk5ejd1ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/udwlYVnMdpR8OBnucf/giphy.gif" width=700>
 </p>
 
 <h1 align="center"> Extensive Settings & Customization </h1>
 <p align="center">
-  <img src="https://i.imgur.com/hC0X7oH.png" width=700>
+  <img src="https://i.imgur.com/SWP9HFU.gif" width=700>
 </p>
 
 ## Known Issues
