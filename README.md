@@ -46,7 +46,7 @@ This module has been created to streamline and automate the grenade throwing in 
 
 <h1 align="center"> Extensive Settings & Customization </h1>
 <p align="center">
-  <img src="https://i.imgur.com/SWP9HFU.gif" width=700>
+  <img src="https://i.imgur.com/hC0X7oH.png" width=700>
 </p>
 
 ## Known Issues
