@@ -39,7 +39,7 @@
   },
   "esmodules": ["scripts/grenade-handler.js"],
   "styles": ["styles/grenades.css"],
-  "url": "https://github.com/MMuton/mmutons-cyberpunk-red-upgraded-grenades",
-  "manifest": "https://raw.githubusercontent.com/MMuton/mmutons-cyberpunk-red-upgraded-grenades/main/module.json",
-  "download": "https://github.com/MMuton/mmutons-cyberpunk-red-upgraded-grenades/archive/refs/heads/main.zip"
+  "url": "https://github.com/MMuton/MMutons-Cyberpunk-Red-Better-Grenades",
+  "manifest": "https://raw.githubusercontent.com/MMuton/MMutons-Cyberpunk-Red-Better-Grenades/main/module.json",
+  "download": "https://github.com/MMuton/MMutons-Cyberpunk-Red-Better-Grenades/archive/refs/heads/main.zip"
 }
