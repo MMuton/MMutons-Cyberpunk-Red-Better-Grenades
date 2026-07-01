@@ -454,8 +454,12 @@ class GrenadeSystem {
     }
 
     static onRenderActorSheet(app, html, data) {
-        if (game.system.id !== "cyberpunk-red-core" || app.actor.type !== "character") return;
-        this.addGrenadeButtons(app, html, data);
+        if (game.system.id !== "cyberpunk-red-core") return;
+        if (html.find('.mook-special-list').length) {
+            this.addGrenadeMookButtons(app, html, data);
+        } else if (html.find('.tab[data-tab="gear"]').length) {
+            this.addGrenadeButtons(app, html, data);
+        }
     }
 
     static addGrenadeButtons(app, html, data) {
@@ -489,6 +493,104 @@ class GrenadeSystem {
                 gearActions.prepend(throwButton);
             }
         });
+
+        // const launcherItems = gearTab.find('.item').filter(function() {
+        //     const itemId = $(this).data("item-id");
+        //     const item = app.actor.items.get(itemId);
+        //     return item?.type === "weapon" &&
+        //         (item.system.weaponType === "grenadeLauncher" || item.system.weaponType === "rocketLauncher") &&
+        //         !$(this).find(".grenade-throw-button").length;
+        // });
+
+        // launcherItems.each(function() {
+        //     const itemElement = $(this);
+        //     const itemId = itemElement.data("item-id");
+        //     const item = app.actor.items.get(itemId);
+
+        //     const fireButton = $(`<a class="item-action grenade-throw-button" data-item-id="${itemId}" title="Fire ${item.name}"><i class="fas fa-bomb"></i></a>`);
+
+        //     fireButton.on("click", async (event) => {
+        //         event.preventDefault();
+        //         event.stopPropagation();
+        //         await GrenadeSystem.fireGrenadeFromLauncher(app.actor, itemId);
+        //     });
+
+        //     const gearActions = itemElement.find(".gear-actions");
+        //     const splitButton = gearActions.find('[data-action-type="split"]');
+        //     if (splitButton.length) {
+        //         splitButton.after(fireButton);
+        //     } else {
+        //         gearActions.prepend(fireButton);
+        //     }
+        // });
+
+        html.find('div.item.weapon-grid').each(function() {
+            const weaponDiv = $(this);
+            const weaponId = weaponDiv.data('item-id');
+            const weapon = app.actor.items.get(weaponId);
+
+            if (!weapon) return;
+            if (weapon.system.weaponType !== "grenadeLauncher" && weapon.system.weaponType !== "rocketLauncher") return;
+            if (weaponDiv.find('.grenade-throw-button').length) return;
+
+            const fireButton = $(`<a class="item-action grenade-throw-button" data-item-id="${weaponId}" title="Fire ${weapon.name}" style="margin-left: 4px;"><i class="fas fa-bomb"></i></a>`);
+
+            fireButton.on("click", async (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                await GrenadeSystem.fireGrenadeFromLauncher(app.actor, weaponId);
+            });
+
+            weaponDiv.find('.weapon-name').append(fireButton);
+        });
+    }
+
+    static addGrenadeMookButtons(app, html, data) {
+        // — Grenade ammo throw buttons in Special Gear —
+        const specialList = html.find('.mook-special-list');
+        if (specialList.length) {
+            const grenadeItems = app.actor.items.filter(i =>
+                i.type === "ammo" && i.system.variety === "grenade"
+            );
+
+            grenadeItems.forEach(item => {
+                if (html.find(`.grenade-throw-button[data-item-id="${item.id}"]`).length) return;
+
+                const itemLink = specialList.find(`a[data-item-id="${item.id}"]`);
+                if (!itemLink.length) return;
+
+                const throwButton = $(`<a class="item-action grenade-throw-button" data-item-id="${item.id}" title="Throw ${item.name}" style="margin-left: 2px;"><i class="fas fa-bomb"></i></a>`);
+
+                throwButton.on("click", async (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    await GrenadeSystem.throwGrenade(app.actor, item.id);
+                });
+
+                itemLink.after(throwButton);
+            });
+        }
+
+        // — Launcher fire buttons in Weapons section —
+        html.find('div.item.weapon-grid').each(function() {
+            const weaponDiv = $(this);
+            const weaponId = weaponDiv.data('item-id');
+            const weapon = app.actor.items.get(weaponId);
+
+            if (!weapon) return;
+            if (weapon.system.weaponType !== "grenadeLauncher" && weapon.system.weaponType !== "rocketLauncher") return;
+            if (weaponDiv.find('.grenade-throw-button').length) return;
+
+            const fireButton = $(`<a class="item-action grenade-throw-button" data-item-id="${weaponId}" title="Fire ${weapon.name}" style="margin-left: 4px;"><i class="fas fa-bomb"></i></a>`);
+
+            fireButton.on("click", async (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                await GrenadeSystem.fireGrenadeFromLauncher(app.actor, weaponId);
+            });
+
+            weaponDiv.find('.weapon-name').append(fireButton);
+        });
     }
 
     static async throwGrenade(actor, itemId) {
@@ -521,14 +623,57 @@ class GrenadeSystem {
         await this.createGrenadeChatMessage(actor, grenade);
     }
 
-    static async createGrenadeChatMessage(actor, grenade) {
+    static async fireGrenadeFromLauncher(actor, weaponId) {
+        if (!actor.isOwner) {
+            ui.notifications.error("You don't have permission to use this character's items");
+            return;
+        }
+
+        const weapon = actor.items.get(weaponId);
+        if (!weapon) {
+            ui.notifications.error("Weapon not found");
+            return;
+        }
+
+        const magazineValue = weapon.system.magazine?.value || 0;
+        if (magazineValue <= 0) {
+            ui.notifications.warn(`${weapon.name} is empty!`);
+            return;f
+        }
+
+        const installedIds = weapon.system.installedItems?.list || [];
+        const installedAmmo = installedIds
+            .map(id => actor.items.get(id))
+            .find(i => i?.type === "ammo" && (i.system.variety === "grenade" || i.system.variety === "rocket"));
+
+        if (!installedAmmo) {
+            ui.notifications.warn(`No ammo loaded in ${weapon.name}`);
+            return;
+        }
+
+        await weapon.update({ "system.magazine.value": magazineValue - 1 });
+
+        const currentAmount = installedAmmo.system.amount || 0;
+        if (currentAmount > 0) {
+            await installedAmmo.update({ "system.amount": currentAmount - 1 });
+        }
+
+        const isRocket = installedAmmo.system.variety === "rocket";
+        const options = isRocket ? { damageOverride: weapon.system.damage } : {};
+        await this.createGrenadeChatMessage(actor, installedAmmo, options);
+    }
+
+    static async createGrenadeChatMessage(actor, grenade, options = {}) {
         const speaker = ChatMessage.getSpeaker({ actor });
         const actorName = speaker.alias || actor.name;
         const grenadeName = grenade.name;
         const rawVariety = grenade.system.type || "basic";
         const variety = rawVariety.toLowerCase();
         
-        const grenadeConfig = this.GRENADE_TYPES[variety] || this.GRENADE_TYPES["basic"];
+        const baseConfig = this.GRENADE_TYPES[variety] || this.GRENADE_TYPES["basic"];
+        const grenadeConfig = options.damageOverride
+            ? { ...baseConfig, damage: options.damageOverride }
+            : baseConfig;
         const grenadeColor = this.getGrenadeColor(variety);
         const ablationValue = grenade.system.ablationValue || grenadeConfig.ablation;
         
