@@ -1,37 +1,40 @@
-{{!-- Alternative Handlebars template if you prefer external templating --}}
-<div class="cpr-grenade-card">
-  <div class="grenade-header">
-    <img src="{{item.img}}" alt="{{item.name}}" />
-    <div class="grenade-title">
-      <h3>{{actor.name}} throws a {{item.name}}!</h3>
-      <span class="grenade-variety">{{variety}}</span>
+<div class="rollcard mmg-card mmg-throw-card">
+    <div class="rollcard-top">
+        <div class="cpr-block chat-rollTitle-stat">
+            <div class="text-center text-padding-top text-normal text-semi">{{actorName}} {{verb}} {{grenadeName}}!</div>
+            <div class="rollcard-subtitle">
+                <div class="rollcard-subtitle-center text-small">{{typeLabel}}</div>
+            </div>
+        </div>
     </div>
-  </div>
-  
-  {{#if item.system.description}}
-  <div class="grenade-description">
-    {{{item.system.description}}}
-  </div>
-  {{/if}}
-  
-  <div class="grenade-actions">
-    <button class="grenade-action-button template-button" 
-            data-action="place-template"
-            data-color="{{color}}">
-      <i class="fas fa-draw-square"></i>
-      Place Blast Template (5×5)
-    </button>
-    
-    <button class="grenade-action-button damage-button" 
-            data-action="roll-damage">
-      <i class="fas fa-dice-d6"></i>
-      Roll Damage (6d6)
-    </button>
-  </div>
-  
-  <div class="grenade-stats">
-    <span><strong>Range:</strong> 25m</span>
-    <span><strong>DV:</strong> Athletics + DEX + 1d10</span>
-    <span><strong>Effect:</strong> {{variety}}</span>
-  </div>
+    <div class="rollcard-bottom">
+        <div class="cpr-block grenade-card-body">
+            <div class="grenade-card-header-row">
+                <img src="{{img}}" alt="{{grenadeName}}" class="grenade-card-img">
+            </div>
+            <div class="grenade-actions">
+                {{#each buttons}}
+                <button type="button" class="grenade-action-button {{cls}} {{#if gmOnly}}mmg-gm-only{{/if}}" data-mmg-action="{{action}}" title="{{title}}">
+                    <i class="{{icon}}"></i><span class="mmg-label">{{label}}</span>
+                </button>
+                {{/each}}
+            </div>
+            <div class="grenade-dv-section">
+                <button type="button" class="grenade-dv-toggle">
+                    <i class="fas fa-chevron-down"></i> <span>{{localize "CPR.dialog.dv.dvTable"}} ({{dvLabel}})</span>
+                </button>
+                <div class="grenade-dv-table mmg-hide">
+                    <table class="grenade-dv-inner-table">
+                        <thead><tr>{{#each dvColumns}}<th>{{range}}</th>{{/each}}</tr></thead>
+                        <tbody><tr>{{#each dvColumns}}<td>{{dv}}</td>{{/each}}</tr></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="grenade-stats text-small">
+                <span><strong>Max Range:</strong> {{maxRange}}m</span>
+                <span><strong>{{localize "CPR.global.generic.skill"}}:</strong> {{skillName}}</span>
+                <span><strong>{{localize "CPR.global.generic.type"}}:</strong> {{typeLabel}}</span>
+            </div>
+        </div>
+    </div>
 </div>

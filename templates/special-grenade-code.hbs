@@ -1,311 +1,57 @@
-<form class="special-grenade-config-form">
-    <div class="form-header">
-        <h2><i class="fas fa-bomb"></i> Special Grenade Configuration</h2>
-        <p class="hint">Configure custom effects for special grenades.</p>
+{{#*inline "entry"}}
+<li class="dialog-item grenade-entry">
+    <div class="flexrow mmg-entry-row">
+        <input type="text" class="grenade-name" value="{{name}}" placeholder="{{localize "CPR.global.generic.name"}}">
+        <input type="color" class="grenade-color" value="{{color}}" data-tooltip="Template Color">
+        <label class="mmg-entry-option"><input type="checkbox" class="delete-template" {{#if deleteTemplate}}checked{{/if}}> Delete Template</label>
+        <label class="mmg-entry-option">Scale <input type="number" class="tile-scale" value="{{tileScale}}" min="0.1" max="10" step="0.1"></label>
+        <a class="expand-btn mmg-entry-icon" data-tooltip="Show or hide code"><i class="fas fa-code"></i></a>
+        <a class="delete-grenade-btn mmg-entry-icon" data-tooltip="Delete"><i class="fas fa-trash-can"></i></a>
     </div>
-    
-    <div class="built-in-section">
-        <h3>Built-In Handlers</h3>
-        <ul class="built-in-list">
+    <div class="grenade-code-section" style="display: none;">
+        <textarea class="grenade-code" rows="10" placeholder="Custom JavaScript for this grenade">{{code}}</textarea>
+        <div class="text-small mmg-code-help">
+            Variables: <code>grenadeName</code>, <code>actor</code>, <code>token</code>, <code>targets</code>, <code>templates</code>, <code>config</code>, <code>GrenadeSystem</code>.
+            Helpers include <code>GrenadeSystem.createScaledTile()</code>, <code>GrenadeSystem.applyCPRDamage()</code> and <code>GrenadeSystem.firstExistingFile()</code>.
+        </div>
+    </div>
+</li>
+{{/inline}}
+<form class="dialog-sheet mmg-config special-grenade-config-form" autocomplete="off">
+    <div class="dialog-header flexcol">
+        <div class="text-center text-small">Custom effects for grenades whose ammo type is "{{localize "CPR.global.ammo.type.special"}}". Entries match the grenade's item name. Custom code runs on the GM's client.</div>
+    </div>
+    <hr/>
+    <div class="dialog-grid flexcol">
+        <ol class="dialog-list">
+            <li class="dialog-item dialog-item-header flexrow">
+                <div class="dialog-item-name">Built-In Handlers</div>
+            </li>
             {{#each builtInGrenades}}
-            <li><strong>{{name}}</strong>: {{description}}</li>
+            <li class="dialog-item flexrow">
+                <div class="dialog-item-name text-small"><span class="text-semi">{{name}}</span>: {{description}}</div>
+            </li>
             {{/each}}
-        </ul>
+        </ol>
     </div>
-    
-    <div class="custom-grenades-section">
-        <div class="section-header">
-            <h3>Custom Grenades</h3>
-            <button type="button" class="add-grenade-btn">
-                <i class="fas fa-plus"></i> Add Grenade
-            </button>
-        </div>
-        
-        <div class="grenade-list">
+    <div class="dialog-grid flexcol">
+        <ol class="dialog-list grenade-list">
+            <li class="dialog-item dialog-item-header flexrow mmg-list-header">
+                <div class="dialog-item-name">Custom Grenades</div>
+                <div class="dialog-item-input">
+                    <a class="add-grenade-btn" data-tooltip="{{localize "CPR.global.generic.add"}}"><i class="fas fa-plus"></i> {{localize "CPR.global.generic.add"}}</a>
+                </div>
+            </li>
             {{#each grenades}}
-            <div class="grenade-entry" data-index="{{@index}}">
-                <div class="grenade-header-row">
-                    <input type="text" class="grenade-name" value="{{name}}" placeholder="Grenade Name">
-                    <input type="color" class="grenade-color" value="{{color}}" title="Template Color">
-                    <label class="delete-template-label">
-                        <input type="checkbox" class="delete-template" {{#if deleteTemplate}}checked{{/if}}>
-                        Delete Template
-                    </label>
-                    <label class="tile-scale-label">
-                        Scale: <input type="number" class="tile-scale" value="{{tileScale}}" min="0.1" max="10" step="0.1">
-                    </label>
-                    <button type="button" class="expand-btn" title="Expand/Collapse Code">
-                        <i class="fas fa-code"></i>
-                    </button>
-                    <button type="button" class="delete-grenade-btn" title="Delete Grenade">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-                <div class="grenade-code-section" style="display: none;">
-                    <textarea class="grenade-code" rows="10" placeholder="// Custom JavaScript code...">{{code}}</textarea>
-                    <div class="code-help">
-                        Variables: <code>grenadeName</code>, <code>actor</code>, <code>token</code>, <code>targets</code>, <code>templates</code>, <code>config</code>, <code>GrenadeSystem</code>
-                    </div>
-                </div>
-            </div>
+            {{> entry this}}
             {{/each}}
-        </div>
+        </ol>
     </div>
-    
-    <div class="form-footer">
-        <button type="button" class="save-config-btn">
-            <i class="fas fa-save"></i> Save
-        </button>
-        <button type="button" class="save-close-btn">
-            <i class="fas fa-save"></i> Save & Close
-        </button>
+
+    <template class="grenade-entry-template">{{> entry blank}}</template>
+
+    <div class="dialog-footer flexrow">
+        <button type="button" class="cpr-dialog-button save-config-btn"><i class="fas fa-floppy-disk"></i> {{localize "CPR.settings.saveSettings"}}</button>
+        <button type="button" class="cpr-dialog-button save-close-btn"><i class="fas fa-check"></i> {{localize "CPR.dialog.common.confirm"}}</button>
     </div>
 </form>
-
-<style>
-.special-grenade-config-form {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    color: #ccc;
-}
-
-.form-header {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #444;
-}
-
-.form-header h2 {
-    margin: 0 0 5px 0;
-    color: #ff69b4;
-    font-size: 18px;
-}
-
-.form-header .hint {
-    margin: 0;
-    font-size: 11px;
-    color: #999;
-}
-
-.built-in-section {
-    background: #2a2a2a;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-.built-in-section h3 {
-    margin: 0 0 8px 0;
-    color: #ff69b4;
-    font-size: 13px;
-}
-
-.built-in-list {
-    margin: 0;
-    padding-left: 20px;
-    font-size: 11px;
-}
-
-.built-in-list li {
-    margin-bottom: 3px;
-}
-
-.custom-grenades-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.section-header h3 {
-    margin: 0;
-    color: #ff69b4;
-    font-size: 14px;
-}
-
-.add-grenade-btn {
-    background: #4a4a4a;
-    color: #fff;
-    border: 1px solid #666;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.add-grenade-btn:hover {
-    background: #5a5a5a;
-}
-
-.grenade-list {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-}
-
-.grenade-entry {
-    background: #2a2a2a;
-    border: 1px solid #444;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    padding: 8px;
-}
-
-.grenade-header-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.grenade-name {
-    flex: 1;
-    min-width: 120px;
-    background: #1a1a1a;
-    border: 1px solid #555;
-    border-radius: 3px;
-    padding: 5px 8px;
-    color: #fff;
-    font-size: 12px;
-}
-
-.grenade-color {
-    width: 35px;
-    height: 28px;
-    border: 1px solid #555;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 0;
-}
-
-.delete-template-label,
-.tile-scale-label {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    color: #aaa;
-    white-space: nowrap;
-}
-
-.delete-template {
-    width: 14px;
-    height: 14px;
-}
-
-.tile-scale {
-    width: 50px;
-    background: #1a1a1a;
-    border: 1px solid #555;
-    border-radius: 3px;
-    padding: 3px 5px;
-    color: #fff;
-    font-size: 11px;
-}
-
-.expand-btn,
-.delete-grenade-btn {
-    background: #3a3a3a;
-    border: 1px solid #555;
-    border-radius: 3px;
-    color: #aaa;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.expand-btn:hover {
-    background: #4a4a4a;
-    color: #4fc3f7;
-}
-
-.delete-grenade-btn:hover {
-    background: #5a2a2a;
-    color: #ff6666;
-}
-
-.grenade-code-section {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid #444;
-}
-
-.grenade-code {
-    width: 100%;
-    background: #1a1a1a;
-    border: 1px solid #555;
-    border-radius: 3px;
-    padding: 8px;
-    color: #d4d4d4;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 11px;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.code-help {
-    margin-top: 5px;
-    font-size: 10px;
-    color: #888;
-}
-
-.code-help code {
-    background: #3a3a3a;
-    padding: 1px 4px;
-    border-radius: 2px;
-    color: #4fc3f7;
-}
-
-.form-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    padding-top: 10px;
-    margin-top: 10px;
-    border-top: 1px solid #444;
-}
-
-.save-config-btn,
-.save-close-btn {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.save-config-btn:hover,
-.save-close-btn:hover {
-    background: #45a049;
-}
-
-.save-close-btn {
-    background: #2196F3;
-}
-
-.save-close-btn:hover {
-    background: #1976D2;
-}
-</style>

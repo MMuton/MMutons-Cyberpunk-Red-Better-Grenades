@@ -1,0 +1,50 @@
+<form class="dialog-sheet mmg-resistance" autocomplete="off">
+    <div class="dialog-header flexcol">
+        <div class="text-center text-normal text-semi">DV {{dv}} {{skill}}</div>
+        <div class="text-center text-small">On failure: {{failText}}</div>
+        <div class="text-center text-small mmg-legend">
+            <span class="mmg-pc text-semi"><i class="fas fa-user"></i> Player character</span>
+            <span class="mmg-npc text-semi"><i class="fas fa-user-secret"></i> NPC</span>
+        </div>
+    </div>
+    <hr/>
+    <div class="dialog-grid flexcol">
+        <ol class="dialog-list mmg-target-list">
+            <li class="dialog-item dialog-item-header flexrow mmg-target-row mmg-target-head">
+                <div></div>
+                <div class="dialog-item-name">Target</div>
+                <div class="dialog-item-detail">{{localize "CPR.global.generic.skill"}}</div>
+                <div class="dialog-item-detail">Roll</div>
+                <div class="dialog-item-detail">{{localize "CPR.rolls.success"}}</div>
+                <div class="dialog-item-detail">{{localize "CPR.rolls.failed"}}</div>
+            </li>
+            {{#each targets}}
+            <li class="dialog-item flexrow mmg-target-row" data-token-id="{{tokenId}}">
+                <img class="mmg-target-img" src="{{img}}" alt="">
+                <div class="dialog-item-name">
+                    <a class="mmg-sheet-link text-semi {{#if isPC}}mmg-pc{{else}}mmg-npc{{/if}}" data-token-id="{{tokenId}}" data-tooltip="Open {{name}}'s sheet">
+                        <i class="fas {{#if isPC}}fa-user{{else}}fa-user-secret{{/if}}"></i> {{name}}
+                    </a>
+                    {{#if note}}<div class="text-small mmg-target-note">{{note}}</div>{{/if}}
+                </div>
+                <div class="dialog-item-detail" data-tooltip="{{baseLabel}}">+{{base}}</div>
+                <div class="dialog-item-detail mmg-target-roll">
+                    <a class="mmg-roll-one" data-tooltip="Roll {{baseLabel}} + 1d10"><i class="fas fa-dice"></i></a>
+                    <span class="mmg-roll-result text-semi"></span>
+                </div>
+                <div class="dialog-item-detail"><input type="checkbox" class="mmg-decision" value="pass" {{#if (eq preset "pass")}}checked{{/if}}></div>
+                <div class="dialog-item-detail"><input type="checkbox" class="mmg-decision" value="fail" {{#if (eq preset "fail")}}checked{{/if}}></div>
+            </li>
+            {{/each}}
+        </ol>
+    </div>
+    <div class="dialog-footer flexrow">
+        <button type="button" class="cpr-dialog-button mmg-roll-all"><i class="fas fa-dice"></i> Roll All</button>
+        <button type="button" class="cpr-dialog-button mmg-mark-all" data-mark="pass"><i class="fas fa-check"></i> All: {{localize "CPR.rolls.success"}}</button>
+        <button type="button" class="cpr-dialog-button mmg-mark-all" data-mark="fail"><i class="fas fa-xmark"></i> All: {{localize "CPR.rolls.failed"}}</button>
+    </div>
+    <div class="dialog-footer flexrow">
+        <button type="button" class="cpr-dialog-button mmg-apply"><i class="fas fa-check"></i> {{localize "CPR.dialog.common.confirm"}}</button>
+        <button type="button" class="cpr-dialog-button mmg-cancel"><i class="fas fa-xmark"></i> {{localize "CPR.dialog.common.cancel"}}</button>
+    </div>
+</form>

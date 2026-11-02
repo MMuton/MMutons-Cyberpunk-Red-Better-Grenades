@@ -1,0 +1,30 @@
+<div class="rollcard mmg-card">
+    <div class="rollcard-top">
+        <div class="cpr-block chat-rollTitle-stat">
+            <div class="text-center text-padding-top text-normal text-semi">{{grenadeName}}</div>
+            <div class="rollcard-subtitle">
+                <div class="rollcard-subtitle-center text-small">{{subtitle}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="rollcard-bottom">
+        <div class="cpr-block">
+            <div class="text-normal grenade-result-text mmg-summary">
+                {{#each rows}}
+                <div class="mmg-summary-row">
+                    <div class="mmg-summary-line">
+                        <span class="text-semi {{#if isPC}}mmg-pc{{else}}mmg-npc{{/if}}">{{name}}</span>
+                        <span>
+                            {{#if rollDetail}}<span class="text-small" data-tooltip="{{rollDetail}}">{{roll}}</span>{{/if}}
+                            {{#if (eq decision "pass")}}<span class="roll-success text-semi">{{localize "CPR.rolls.success"}}</span>
+                            {{else if (eq decision "fail")}}<span class="roll-failure text-semi">{{localize "CPR.rolls.failed"}}</span>
+                            {{else}}<span class="text-semi">Skipped</span>{{/if}}
+                        </span>
+                    </div>
+                    <div class="text-small">{{{effect}}}</div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

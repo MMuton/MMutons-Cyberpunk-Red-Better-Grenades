@@ -1,0 +1,32 @@
+<div class="rollcard mmg-card">
+    <div class="rollcard-top">
+        <div class="cpr-block chat-rollTitle-stat">
+            <div class="text-center text-padding-top text-normal text-semi">{{grenadeName}}</div>
+            <div class="rollcard-subtitle">
+                <div class="rollcard-subtitle-center text-small">{{subtitle}}{{#if subtitleEm}} <em>({{subtitleEm}})</em>{{/if}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="rollcard-bottom">
+        <div class="cpr-block">
+            <div class="d6-rollcard-data">
+                <div class="d6-dice-div">{{{dice}}}</div>
+                <div class="d6-number-div">
+                    <a><span class="clickable" data-mmg-toggle="grenade-d6-data-details">{{total}}</span></a>
+                </div>
+                <div class="d6-data-div">
+                    {{#if isCritical}}<div class="text-normal text-semi">{{localize "CPR.rolls.criticalDamage"}}: {{bonusDamage}}</div>{{/if}}
+                    {{#if isResist}}
+                    <div class="text-normal text-semi">Direct damage on resistance fail</div>
+                    {{else}}
+                    <div class="grenade-d6-data-details hide">
+                        <div class="text-normal text-semi text-nowrap">
+                            GM will apply damage to tokens in blast template{{#if ablation}}<br>{{localize "CPR.global.generic.ablation"}}: +{{ablation}}{{/if}}{{#if nonLethal}}<br>Non-lethal{{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

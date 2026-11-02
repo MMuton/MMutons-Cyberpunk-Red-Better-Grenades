@@ -24,15 +24,16 @@ This module has been created to streamline and automate grenade throwing in the 
 
 ## Features
 
-* A **throw button** appears directly on each grenade in the Gear tab, where the Split and Delete Buttons are. Clicking it automatically decrements the quantity and optionally removes the item when the last one is used.
-* Throwing a grenade posts a **chat card** with buttons to place the blast template, roll damage, and apply effects.
-* A **5x5 blast template** is placed centered on the thrower's token with a single click. Template color is fully configurable per grenade type in the settings.
-* **Damage is rolled and applied automatically** to all tokens inside the blast template. Armor SP is soaked and ablation is applied per the rules. The template is deleted after damage is applied.
+* A **throw button** appears on each grenade in the Gear tab (next to Split and Delete) and in a Mook's Special Gear. Equipped **grenade and rocket launchers** get a fire button in the Fight tab. Throwing uses one grenade (and can remove the item when the last one is gone); firing a launcher uses one round from the magazine.
+* Throwing posts a **chat card** with buttons to place the blast template and roll damage or detonate.
+* **Place the 5x5 blast template with your cursor.** It shows the distance and DV as you move it; left-click to place, right-click or Esc to cancel. Template color is configurable per grenade type.
+* **Throw check:** after placing, the thrower's Athletics (or the launcher's skill) is rolled with the system's roll dialog against the range DV, and a HIT/MISS card is posted.
+* **Damage is applied with the system's own damage routine** to every token in the template: armor SP (minus ablation), ablation, critical damage, shields, damage reduction and non-lethal rubber all follow the system, and each target gets the system's damage card with undo.
+* **One resistance dialog per grenade** for Resist Torture/Drugs and Cybertech checks: click a name to open that token's sheet, PCs and NPCs are colored differently, tick Pass/Fail or roll for one target or everyone. Results are posted as one summary card.
 * All current grenade types are handled with rules-accurate behavior.
-* **Resistance check dialogs** prompt the GM per-target for Resist Torture/Drugs and Cybertech checks.
-* **Sequencer integration** plays explosion, EMP, and flashbang animations and sounds on detonation. Automatically detects which JB2A version is installed for the animations.
+* **Sequencer integration** plays explosion, EMP, flashbang and smoke animations and sounds. Automatically detects which JB2A version is installed.
 * **Bundled sound effects** for explosion, EMP, and flashbang are included and set as defaults.
-* **Custom grenade code editor** allows GMs to write JavaScript for special grenade types, with access to targets, templates, actor, and the full GrenadeSystem API. Includes the Rave Grenade from "The 12 Days of Cutiemas" DLC as a built-in example.
+* **Custom grenade code editor** lets GMs write JavaScript for special grenade types, with access to targets, templates, actor, and the `GrenadeSystem` API. Custom code always runs on the GM's client. Includes the Rave Grenade from "The 12 Days of Cutiemas" DLC as a built-in example.
 
 <h1 align="center"> Easy & Automated Grenade Throwing With 5x5 Template Creation  </h1>
 <p align="center">

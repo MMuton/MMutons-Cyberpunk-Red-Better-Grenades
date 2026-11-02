@@ -1,0 +1,20 @@
+<div class="rollcard mmg-card">
+    <div class="rollcard-top">
+        <div class="cpr-block chat-rollTitle-stat">
+            <div class="text-center text-padding-top text-normal text-semi">[GM ONLY] {{grenadeName}} {{titleSuffix}}</div>
+            <div class="rollcard-subtitle">
+                <div class="rollcard-subtitle-center text-small">{{subtitle}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="rollcard-bottom">
+        <div class="cpr-block grenade-gm-card-block">
+            <div class="grenade-gm-card-stats text-small">
+                {{#each stats}}<span><strong>{{label}}:</strong> {{value}}</span>{{/each}}
+            </div>
+            <button type="button" class="grenade-action-button damage-button grenade-apply-btn" data-mmg-action="gm-apply">
+                <i class="{{icon}}"></i> <span class="mmg-label">{{buttonLabel}}</span>
+            </button>
+        </div>
+    </div>
+</div>

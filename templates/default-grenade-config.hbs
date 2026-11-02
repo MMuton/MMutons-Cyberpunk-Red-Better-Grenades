@@ -1,152 +1,98 @@
-<form class="default-grenade-config-form">
-    <nav class="tabs" data-group="primary">
-        <a class="item active" data-tab="colors"><i class="fas fa-palette"></i> Colors</a>
-        <a class="item" data-tab="explosion"><i class="fas fa-bomb"></i> Explosion</a>
-        <a class="item" data-tab="emp"><i class="fas fa-bolt"></i> EMP</a>
-        <a class="item" data-tab="flashbang"><i class="fas fa-sun"></i> Flashbang</a>
-        <a class="item" data-tab="smoke"><i class="fas fa-cloud"></i> Smoke</a>
+{{#*inline "fileRow"}}
+<li class="dialog-item flexrow">
+    <div class="dialog-item-name">{{label}}</div>
+    <div class="dialog-item-input mmg-file-input">
+        <input type="text" name="effects.{{key}}" value="{{value}}">
+        <button type="button" class="file-picker" data-type="{{type}}" data-target="effects.{{key}}" data-tooltip="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
+    </div>
+</li>
+{{/inline}}
+{{#*inline "numberRow"}}
+<li class="dialog-item flexrow">
+    <div class="dialog-item-name">{{label}}</div>
+    <div class="dialog-item-input">
+        <input type="number" name="effects.{{key}}" value="{{value}}" min="{{min}}" max="{{max}}" step="0.1">
+    </div>
+</li>
+{{/inline}}
+<form class="dialog-sheet mmg-config" autocomplete="off">
+    <nav class="cpr-tabs nav text-semi mmg-config-tabs" data-group="primary">
+        <div class="tab-pink-underlay"><a class="tab-label text-small tab-indent" data-tab="colors">Colors</a></div>
+        <div class="tab-pink-underlay"><a class="tab-label text-small tab-indent" data-tab="explosion">Explosion</a></div>
+        <div class="tab-pink-underlay"><a class="tab-label text-small tab-indent" data-tab="emp">{{localize "CPR.global.ammo.type.emp"}}</a></div>
+        <div class="tab-pink-underlay"><a class="tab-label text-small tab-indent" data-tab="flashbang">{{localize "CPR.global.ammo.type.flashBang"}}</a></div>
+        <div class="tab-pink-underlay"><a class="tab-label text-small tab-indent" data-tab="smoke">{{localize "CPR.global.ammo.type.smoke"}}</a></div>
     </nav>
 
-    <section class="tab-content">
-        <div class="tab active" data-group="primary" data-tab="colors">
-            <div class="grenade-color-grid">
+    <section class="mmg-config-content">
+        <div class="tab" data-group="primary" data-tab="colors">
+            <ol class="dialog-list">
+                <li class="dialog-item dialog-item-header flexrow">
+                    <div class="dialog-item-name">{{localize "CPR.global.generic.type"}}</div>
+                    <div class="dialog-item-input">Template Color</div>
+                </li>
                 {{#each colorList}}
-                <div class="grenade-color-row">
-                    <label>{{this.label}}</label>
-                    <input type="color" name="{{this.key}}" value="{{this.value}}">
-                </div>
+                <li class="dialog-item flexrow">
+                    <div class="dialog-item-name">{{this.label}}</div>
+                    <div class="dialog-item-input"><input type="color" name="colors.{{this.key}}" value="{{this.value}}"></div>
+                </li>
                 {{/each}}
-            </div>
+            </ol>
         </div>
 
         <div class="tab" data-group="primary" data-tab="explosion">
-            <div class="effect-section">
-                <p class="effect-hint">Used for: Basic, Expansive, Rubber, Smart, Armor Piercing, Incendiary, Acid grenades</p>
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="explosionAnimation" value="{{explosionAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="explosionAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Sound File</label>
-                    <div class="form-fields">
-                        <input type="text" name="explosionSound" value="{{explosionSound}}">
-                        <button type="button" class="file-picker" data-type="audio" data-target="explosionSound" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Volume (0–1)</label>
-                    <input type="number" name="explosionVolume" value="{{explosionVolume}}" min="0" max="1" step="0.1">
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="explosionScale" value="{{explosionScale}}" min="0.1" max="3" step="0.1">
-                </div>
-            </div>
+            <ol class="dialog-list">
+                <li class="dialog-item dialog-item-header flexrow">
+                    <div class="dialog-item-name">Explosion</div>
+                </li>
+                <li class="dialog-item flexrow mmg-hint-row">
+                    <div class="dialog-item-name text-small">Used for every grenade except EMP, Flashbang and Smoke.</div>
+                </li>
+                {{> fileRow label="Animation File" key="explosionAnimation" value=effects.explosionAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="explosionScale" value=effects.explosionScale min="0.1" max="3"}}
+                {{> fileRow label="Sound File" key="explosionSound" value=effects.explosionSound type="audio"}}
+                {{> numberRow label="Volume (0 to 1)" key="explosionVolume" value=effects.explosionVolume min="0" max="1"}}
+            </ol>
         </div>
 
         <div class="tab" data-group="primary" data-tab="emp">
-            <div class="effect-section">
-                <div class="effect-subsection-label">Explosion</div>
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="empCenterAnimation" value="{{empCenterAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="empCenterAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="empCenterScale" value="{{empCenterScale}}" min="0.1" max="3" step="0.1">
-                </div>
-                <div class="effect-subsection-label">Aftermath (On-Tokens)</div>
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="empAnimation" value="{{empAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="empAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="empScale" value="{{empScale}}" min="0.1" max="3" step="0.1">
-                </div>
-                <div class="effect-subsection-label">Audio</div>
-                <div class="form-group">
-                    <label>Sound File</label>
-                    <div class="form-fields">
-                        <input type="text" name="empSound" value="{{empSound}}">
-                        <button type="button" class="file-picker" data-type="audio" data-target="empSound" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Volume (0–1)</label>
-                    <input type="number" name="empVolume" value="{{empVolume}}" min="0" max="1" step="0.1">
-                </div>
-            </div>
+            <ol class="dialog-list">
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">Explosion</div></li>
+                {{> fileRow label="Animation File" key="empCenterAnimation" value=effects.empCenterAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="empCenterScale" value=effects.empCenterScale min="0.1" max="3"}}
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">On Affected Tokens</div></li>
+                {{> fileRow label="Animation File" key="empAnimation" value=effects.empAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="empScale" value=effects.empScale min="0.1" max="3"}}
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">Sound</div></li>
+                {{> fileRow label="Sound File" key="empSound" value=effects.empSound type="audio"}}
+                {{> numberRow label="Volume (0 to 1)" key="empVolume" value=effects.empVolume min="0" max="1"}}
+            </ol>
         </div>
 
         <div class="tab" data-group="primary" data-tab="flashbang">
-            <div class="effect-section">
-                <div class="effect-subsection-label">Explosion</div>
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="flashbangCenterAnimation" value="{{flashbangCenterAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="flashbangCenterAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="flashbangCenterScale" value="{{flashbangCenterScale}}" min="0.1" max="3" step="0.1">
-                </div>
-                <div class="effect-subsection-label">Aftermath (On-Tokens)</div>
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="flashbangAnimation" value="{{flashbangAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="flashbangAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="flashbangScale" value="{{flashbangScale}}" min="0.1" max="3" step="0.1">
-                </div>
-                <div class="effect-subsection-label">Audio</div>
-                <div class="form-group">
-                    <label>Sound File</label>
-                    <div class="form-fields">
-                        <input type="text" name="flashbangSound" value="{{flashbangSound}}">
-                        <button type="button" class="file-picker" data-type="audio" data-target="flashbangSound" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Volume (0–1)</label>
-                    <input type="number" name="flashbangVolume" value="{{flashbangVolume}}" min="0" max="1" step="0.1">
-                </div>
-            </div>
+            <ol class="dialog-list">
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">Explosion</div></li>
+                {{> fileRow label="Animation File" key="flashbangCenterAnimation" value=effects.flashbangCenterAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="flashbangCenterScale" value=effects.flashbangCenterScale min="0.1" max="3"}}
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">On Affected Tokens</div></li>
+                {{> fileRow label="Animation File" key="flashbangAnimation" value=effects.flashbangAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="flashbangScale" value=effects.flashbangScale min="0.1" max="3"}}
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">Sound</div></li>
+                {{> fileRow label="Sound File" key="flashbangSound" value=effects.flashbangSound type="audio"}}
+                {{> numberRow label="Volume (0 to 1)" key="flashbangVolume" value=effects.flashbangVolume min="0" max="1"}}
+            </ol>
         </div>
 
         <div class="tab" data-group="primary" data-tab="smoke">
-            <div class="effect-section">
-                <div class="form-group">
-                    <label>Animation File</label>
-                    <div class="form-fields">
-                        <input type="text" name="smokeAnimation" value="{{smokeAnimation}}">
-                        <button type="button" class="file-picker" data-type="imagevideo" data-target="smokeAnimation" title="Browse Files"><i class="fas fa-file-import fa-fw"></i></button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Scale</label>
-                    <input type="number" name="smokeScale" value="{{smokeScale}}" min="0.1" max="3" step="0.1">
-                </div>
-            </div>
+            <ol class="dialog-list">
+                <li class="dialog-item dialog-item-header flexrow"><div class="dialog-item-name">{{localize "CPR.global.ammo.type.smoke"}}</div></li>
+                {{> fileRow label="Animation File" key="smokeAnimation" value=effects.smokeAnimation type="imagevideo"}}
+                {{> numberRow label="Scale" key="smokeScale" value=effects.smokeScale min="0.1" max="3"}}
+            </ol>
         </div>
     </section>
 
-    <footer class="sheet-footer">
-        <button type="submit"><i class="fas fa-save"></i> Save Changes</button>
-    </footer>
+    <div class="dialog-footer flexrow">
+        <button type="submit" class="cpr-dialog-button"><i class="fas fa-floppy-disk"></i> {{localize "CPR.settings.saveSettings"}}</button>
+    </div>
 </form>

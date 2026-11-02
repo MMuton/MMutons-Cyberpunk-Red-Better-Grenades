@@ -1,3 +1,14 @@
+:root {
+  --mmg-pc: #0b57d0;
+  --mmg-npc: var(--cpr-color-red, #b90202);
+}
+html[data-cpr-theme="darkmode"] {
+  --mmg-pc: #6ab7ff;
+  --mmg-npc: #ff6b6b;
+}
+
+.mmg-hide { display: none !important; }
+
 .grenade-throw-button {
   color: #c62828;
   cursor: pointer;
@@ -5,37 +16,36 @@
   padding: 2px 5px;
   transition: all 0.2s ease;
 }
-
 .grenade-throw-button:hover {
   color: #e53535;
   text-shadow: 0 0 5px rgba(198, 40, 40, 0.8);
   transform: scale(1.1);
 }
+.grenade-throw-button.mmg-launcher-button { margin-left: 4px; }
+.grenade-throw-button.mmg-mook-button { margin-left: 2px; }
 
-.grenade-card-body {
-  gap: 5px;
-}
+.mmg-card .grenade-card-body { gap: 5px; }
 
-.grenade-card-header-row {
+.mmg-card .grenade-card-header-row {
   display: flex;
   justify-content: center;
   padding: 2px 0 4px;
 }
 
-.grenade-card-img {
+.mmg-card .grenade-card-img {
   width: 36px;
   height: 36px;
-  border: 1px solid var(--cpr-background-chat-border);
   object-fit: contain;
 }
 
-.grenade-actions {
+.mmg-card .grenade-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
   margin: 2px 0;
 }
 
-.grenade-action-button {
+.mmg-card .grenade-action-button {
   flex: 1;
   padding: 6px 4px;
   background-color: var(--cpr-background-chat-card-block-before);
@@ -51,35 +61,19 @@
   align-items: center;
   gap: 3px;
 }
+.mmg-card .grenade-action-button:hover:not(:disabled) { filter: brightness(1.3); }
+.mmg-card .grenade-action-button:active:not(:disabled) { filter: brightness(0.85); }
+.mmg-card .grenade-action-button:disabled,
+.mmg-card .grenade-action-button.disabled { opacity: 0.45; cursor: not-allowed; }
+.mmg-card .grenade-action-button.mmg-busy { opacity: 0.7; cursor: progress; }
+.mmg-card .grenade-action-button i { font-size: 17px; }
 
-.grenade-action-button:hover:not(.disabled) {
-  filter: brightness(1.3);
-}
+.mmg-card .template-button { background-color: var(--cpr-background-chat-card-block); }
+.mmg-card .damage-button,
+.mmg-card .macro-button,
+.mmg-card .smoke-button { background-color: var(--cpr-color-red); }
 
-.grenade-action-button:active:not(.disabled) {
-  filter: brightness(0.85);
-}
-
-.grenade-action-button.disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.grenade-action-button i {
-  font-size: 17px;
-}
-
-.template-button {
-  background-color: var(--cpr-background-chat-card-block);
-}
-
-.damage-button,
-.macro-button,
-.smoke-button {
-  background-color: var(--cpr-color-red);
-}
-
-.grenade-dv-toggle {
+.mmg-card .grenade-dv-toggle {
   background: none;
   border: 1px solid var(--cpr-background-chat-border);
   color: var(--cpr-text-chat-normal);
@@ -90,35 +84,25 @@
   margin: 3px 0;
   opacity: 0.6;
 }
+.mmg-card .grenade-dv-toggle:hover { opacity: 1; }
 
-.grenade-dv-toggle:hover {
-  opacity: 1;
-}
-
-.grenade-dv-inner-table {
+.mmg-card .grenade-dv-inner-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 10px;
   margin-top: 3px;
 }
-
-.grenade-dv-inner-table th,
-.grenade-dv-inner-table td {
+.mmg-card .grenade-dv-inner-table th,
+.mmg-card .grenade-dv-inner-table td {
   border: 1px solid var(--cpr-background-chat-border);
   padding: 2px 3px;
   text-align: center;
   color: var(--cpr-text-chat-normal);
 }
+.mmg-card .grenade-dv-inner-table th { background-color: var(--cpr-background-chat-card-block); }
+.mmg-card .grenade-dv-inner-table td { background-color: var(--cpr-background-chat-card-block-before); }
 
-.grenade-dv-inner-table th {
-  background-color: var(--cpr-background-chat-card-block);
-}
-
-.grenade-dv-inner-table td {
-  background-color: var(--cpr-background-chat-card-block-before);
-}
-
-.grenade-stats {
+.mmg-card .grenade-stats {
   display: flex;
   justify-content: space-between;
   gap: 6px;
@@ -128,21 +112,12 @@
   color: var(--cpr-text-chat-normal);
   opacity: 0.7;
 }
+.mmg-card .grenade-stats span { flex: 1; text-align: center; }
+.mmg-card .grenade-stats strong { color: var(--cpr-text-chat-normal); }
 
-.grenade-stats span {
-  flex: 1;
-  text-align: center;
-}
-
-.grenade-stats strong {
-  color: var(--cpr-text-chat-normal);
-}
-
-.hide {
-  display: none;
-}
-
-.grenade-gm-card-stats {
+.mmg-card .grenade-gm-card-block { clip-path: none; }
+.mmg-card .grenade-gm-card-block::before { clip-path: none; }
+.mmg-card .grenade-gm-card-stats {
   display: flex;
   justify-content: space-between;
   gap: 8px;
@@ -151,33 +126,8 @@
   background-color: var(--cpr-background-chat-card-block-before);
   color: var(--cpr-text-chat-normal);
 }
-
-.grenade-gm-card-stats strong {
-  color: var(--cpr-text-chat-normal);
-}
-
-.grenade-result-text {
-  padding: 0.5rem 0.25rem 0.25rem 0.5rem;
-  line-height: 1.5;
-  color: var(--cpr-text-chat-normal);
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  text-align: center;
-}
-
-.grenade-gm-card-block {
-  clip-path: none;
-}
-
-.grenade-gm-card-block::before {
-  clip-path: none;
-}
-
-.grenade-apply-damage-btn,
-.grenade-apply-resistance-btn {
+.mmg-card .grenade-gm-card-stats strong { color: var(--cpr-text-chat-normal); }
+.mmg-card .grenade-apply-btn {
   flex: none;
   flex-direction: row;
   align-self: center;
@@ -186,219 +136,98 @@
   font-size: 11px;
   gap: 6px;
 }
+.mmg-card .grenade-apply-btn i { font-size: 13px; }
 
-.critical {
-  color: #ff0000;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
-  animation: pulse 1s infinite;
-  background: transparent !important;
-  background-color: transparent !important;
+.mmg-card .grenade-result-text {
+  padding: 0.5rem 0.25rem 0.25rem 0.5rem;
+  line-height: 1.5;
+  color: var(--cpr-text-chat-normal);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  text-align: center;
 }
+.mmg-card .mmg-summary { text-align: left; padding-top: 0.25rem; }
+.mmg-card .mmg-summary-row { padding: 2px 0; }
+.mmg-card .mmg-summary-row + .mmg-summary-row { border-top: 1px solid var(--cpr-background-chat-border); }
+.mmg-card .mmg-summary-line { display: flex; justify-content: space-between; gap: 0.5rem; }
+.mmg-card .mmg-summary-row > .text-small { padding-left: 0.5rem; }
+.mmg-card .mmg-pc { color: var(--mmg-pc); }
+.mmg-card .mmg-npc { color: var(--mmg-npc); }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
+.mmg-card .mmg-die { margin: 2px; }
 
-.grenade-template-label {
-  color: #fff;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-  font-size: 12px;
-}
+.mmg-resistance-app .window-content { padding: 0; }
+.mmg-resistance .dialog-header { gap: 2px; padding-bottom: 0.313rem; }
+.mmg-resistance .mmg-legend { display: flex; justify-content: center; gap: 1rem; margin-top: 2px; }
+.mmg-resistance .mmg-pc { color: var(--mmg-pc); }
+.mmg-resistance .mmg-npc { color: var(--mmg-npc); }
 
-.dice-roll .dice-result .dice-formula .critical,
-.dice-formula .critical,
-.dice-result .critical {
-  color: #ff0000 !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  font-weight: bold !important;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.8) !important;
-  animation: pulse 1s infinite !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-.default-grenade-config-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.default-grenade-config-form nav.tabs {
-  border-bottom: 1px solid var(--cpr-background-chat-border, #666);
-  margin-bottom: 0;
-  padding: 0 4px;
-  display: flex;
-  gap: 2px;
-}
-
-.default-grenade-config-form nav.tabs .item {
-  padding: 6px 12px;
-  font-size: 12px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  color: #999;
-}
-
-.default-grenade-config-form nav.tabs .item.active {
-  color: #eaeaea;
-  border-bottom-color: #c62828;
-}
-
-.default-grenade-config-form section.tab-content {
-  min-height: 260px;
-}
-
-.grenade-color-grid {
+.mmg-resistance .mmg-target-list { width: 100%; max-height: 55vh; }
+.mmg-resistance .mmg-target-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  padding: 12px;
-}
-
-.grenade-color-row {
-  display: flex;
+  grid-template-columns: 2rem 1fr 3rem 4rem 4rem 4rem;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 3px 6px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+  gap: 0.313rem;
+  padding: 0.188rem 0.313rem;
 }
+.mmg-resistance .mmg-target-head { font-weight: 600; }
+.mmg-resistance .mmg-target-row .dialog-item-detail { text-align: center; }
+.mmg-resistance .mmg-target-img { width: 2rem; height: 2rem; object-fit: contain; }
+.mmg-resistance .mmg-sheet-link { cursor: pointer; }
+.mmg-resistance .mmg-sheet-link:hover { text-decoration: underline; }
+.mmg-resistance .mmg-target-note { opacity: 0.8; }
+.mmg-resistance .mmg-target-roll { display: flex; align-items: center; justify-content: center; gap: 0.313rem; }
+.mmg-resistance .mmg-roll-one { cursor: pointer; font-size: 1.1rem; }
+.mmg-resistance .mmg-roll-result { min-width: 1.5rem; }
+.mmg-resistance input.mmg-decision { margin: 0; }
+.mmg-resistance .mmg-target-row.mmg-undecided { box-shadow: inset 0.25rem 0 0 #ffb300; }
+.mmg-resistance .dialog-footer { gap: 0.313rem; }
+.mmg-resistance .dialog-footer + .dialog-footer { padding-top: 0; }
 
-.grenade-color-row label {
-  font-size: 11px;
-  color: #ccc;
-  flex: 1;
-}
+.mmg-app.default-grenade-config .window-content,
+.mmg-app.special-grenade-config .window-content { padding: 0; }
 
-.grenade-color-row input[type="color"] {
-  width: 36px;
-  height: 22px;
-  border: 1px solid #555;
-  padding: 1px;
-  cursor: pointer;
-  background: none;
-  border-radius: 2px;
+.mmg-config { padding-bottom: 0.313rem; }
+.mmg-config .mmg-config-tabs { padding-top: 0.313rem; padding-right: 0.313rem; }
+.mmg-config .mmg-config-tabs .tab-label { height: 1.25rem; min-width: 0; align-items: center; padding-left: 1.6rem; padding-right: 0.4rem; white-space: nowrap; }
+.mmg-config .mmg-config-content {
+  border: 0.313rem solid var(--cpr-background-border);
+  padding: 0.313rem;
 }
+.mmg-config .dialog-list { width: 100%; }
+.mmg-config .dialog-item { align-items: center; min-height: 1.75rem; }
+.mmg-config .dialog-item-name { flex: 0 0 40%; }
+.mmg-config .dialog-item-input { flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 0.25rem; }
+.mmg-config .mmg-file-input input[type="text"] { flex: 1; }
+.mmg-config .mmg-file-input .file-picker { flex: 0 0 1.75rem; width: 1.75rem; height: 1.6rem; padding: 0; }
+.mmg-config input[type="number"] { width: 4.5rem; flex: 0 0 4.5rem; text-align: center; }
+.mmg-config input[type="color"] { width: 3rem; height: 1.4rem; padding: 0; border: none; background: none; cursor: pointer; }
+.mmg-config .dialog-item-name:only-child { flex: 1; }
+.mmg-config .dialog-footer button { line-height: 1.75rem; }
 
-.effect-section {
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.mmg-config.special-grenade-config-form .dialog-grid + .dialog-grid { padding-top: 0; }
+.mmg-config .grenade-list { max-height: 60vh; }
+.mmg-config .mmg-list-header .dialog-item-name { flex: 1; }
+.mmg-config .add-grenade-btn { color: var(--cpr-text-header); cursor: pointer; }
+.mmg-config .grenade-entry { display: block; padding: 0.25rem 0.313rem; }
+.mmg-config .mmg-entry-row { align-items: center; gap: 0.5rem; }
+.mmg-config .mmg-entry-row > * { flex: 0 0 auto; }
+.mmg-config .mmg-entry-row .grenade-name { flex: 1 1 8rem; }
+.mmg-config .mmg-entry-option { display: flex; align-items: center; gap: 0.25rem; white-space: nowrap; }
+.mmg-config .mmg-entry-option input[type="number"] { width: 3.5rem; flex-basis: 3.5rem; }
+.mmg-config .mmg-entry-icon { cursor: pointer; font-size: 1rem; }
+.mmg-config .delete-grenade-btn { color: var(--cpr-text-icon-highlight); }
+.mmg-config .grenade-code-section { padding-top: 0.313rem; }
+.mmg-config .grenade-code {
+  width: 100%;
+  min-height: 8rem;
+  resize: vertical;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 0.8rem;
+  color: var(--cpr-text-foundry-input);
+  background: var(--cpr-background-foundry-input);
+  border: 0.063rem solid var(--cpr-background-border);
 }
-
-.effect-hint {
-  font-size: 11px;
-  color: #888;
-  font-style: italic;
-  margin: 0 0 4px;
-}
-
-.effect-subsection-label {
-  font-size: 11px;
-  font-weight: bold;
-  color: #c62828;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 8px;
-  padding-bottom: 3px;
-  border-bottom: 1px solid rgba(198, 40, 40, 0.3);
-}
-
-.default-grenade-config-form .form-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-}
-
-.default-grenade-config-form .form-group label {
-  flex: 0 0 140px;
-  font-size: 12px;
-  color: #ccc;
-}
-
-.default-grenade-config-form .form-group input[type="text"] {
-  flex: 1;
-  font-size: 11px;
-  color: #eaeaea;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #555;
-  padding: 3px 6px;
-  border-radius: 2px;
-}
-
-.default-grenade-config-form .form-group input[type="number"] {
-  width: 70px;
-  font-size: 11px;
-  color: #eaeaea;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #555;
-  padding: 3px 6px;
-  border-radius: 2px;
-}
-
-.default-grenade-config-form .sheet-footer {
-  padding: 10px 14px;
-  border-top: 1px solid #555;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.default-grenade-config-form .sheet-footer button {
-  padding: 6px 18px;
-  font-size: 12px;
-  background: #c62828;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.default-grenade-config-form .sheet-footer button:hover {
-  filter: brightness(1.2);
-}
-
-.default-grenade-config-form .form-fields {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-}
-
-.default-grenade-config-form .form-fields input[type="text"] {
-  flex: 1;
-}
-
-.default-grenade-config-form .form-fields .file-picker {
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid #555;
-  border-radius: 2px;
-  color: #ccc;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-}
-
-.default-grenade-config-form .form-fields .file-picker:hover {
-  background: rgba(198, 40, 40, 0.3);
-  border-color: #c62828;
-  color: #fff;
-}
+.mmg-config .mmg-code-help { padding-top: 0.188rem; }
